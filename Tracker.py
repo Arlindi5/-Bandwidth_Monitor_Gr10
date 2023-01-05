@@ -29,3 +29,25 @@ class Tracker:
         dsent = self.__get_bytes_sent_total__() - self.last_bytes_sent_total
         self.__reset_bytes_sent_vars__()
         return dsent / dtime if dtime != 0 else 0
+    
+      def get_current_download_speed(self):
+        """ Returns the current downlaod speed in bytes per seconds.
+        """
+        dtime = time.time() - self.last_bytes_recv_time
+        dsent = self.__get_bytes_recv_total__() - self.last_bytes_recv_total
+        self.__reset_bytes_recv_vars__()
+        return dsent / dtime if dtime != 0 else 0
+
+    def __reset_bytes_sent_vars__(self):
+        self.last_bytes_sent_total = self.__get_bytes_sent_total__()
+        self.last_bytes_sent_time = time.time()
+
+    def __reset_bytes_recv_vars__(self):
+        self.last_bytes_recv_total = self.__get_bytes_recv_total__()
+        self.last_bytes_recv_time = time.time()
+
+    def __get_bytes_sent_total__(self):
+        return psutil.net_io_counters(pernic=False)[__BYTES_SENT__]
+
+    def __get_bytes_recv_total__(self):
+        return psutil.net_io_counters(pernic=False)[__BYTES_RECV__]
