@@ -25,3 +25,37 @@ def size(B):
 WINDOW_SIZE = (400, 400)  # Width x Height
 WINDOW_RESIZEABLE = False  # If the window is resizeable or not.
 REFRESH_DELAY = 1000 # Window update delay in ms.
+
+## Initializing
+window = tk.Tk()
+
+window.title("Network Bandwidth Monitor")  # Setting the window title.
+window.geometry(f"{WINDOW_SIZE[0]}x{WINDOW_SIZE[1]}")  # Setting the window size.
+window.resizable(width = WINDOW_RESIZEABLE, height = WINDOW_RESIZEABLE)  # We now lock the window.
+
+label_total_upload_header = tk.Label(text = "Total Upload:", font = "Quicksand 12 bold")
+label_total_upload_header.pack()
+label_total_upload = tk.Label(text = "Calculating...", font = "Quicksand 12")
+label_total_upload.pack()
+
+label_total_download_header = tk.Label(text = "Total Download:", font = "Quicksand 12 bold")
+label_total_download_header.pack()
+label_total_download = tk.Label(text = "Calculating...", font = "Quicksand 12")
+label_total_download.pack()
+
+label_total_usage_header = tk.Label(text = "Total Usage:", font = "Quicksand 12 bold")
+label_total_usage_header.pack()
+label_total_usage = tk.Label(text = "Calculating...\n", font = "Quicksand 12")
+label_total_usage.pack()
+
+label_upload_header = tk.Label(text = "Upload speed:", font = "Quicksand 12 bold")
+label_upload_header.pack()
+label_upload = tk.Label(text = "Calculating...", font = "Quicksand 12")
+label_upload.pack()
+
+label_download_header = tk.Label(text = "Download speed:", font = "Quicksand 12 bold")
+label_download_header.pack()
+label_download = tk.Label(text = "Calculating...", font = "Quicksand 12")
+label_download.pack()
+
+tracker = Tracker()
