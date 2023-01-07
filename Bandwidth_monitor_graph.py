@@ -45,3 +45,20 @@ def graph():
         plt.draw()
         plt.pause(0.0001)
         plt.clf()
+
+        def add_data(down_speed, up_speed):
+    if len(times) > 1:
+        if (times[-1] - times[0]).total_seconds() // 60 >= DATA_DURATION:
+            del times[0]
+            del speeds_recv[0]
+            del speeds_sent[0]
+    speeds_recv.append(down_speed)
+    speeds_sent.append(up_speed)
+    times.append(datetime.now())
+
+if __name__ == '__main__':
+    try:
+        threading.Thread(target=graph).start()
+        threading.Thread(target=table).start()
+    except:
+        print("An exception occurred")
